@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ian Altemus — Cloud Infrastructure & DevOps Engineer</title>
+<meta name="description" content="Cloud Infrastructure and DevOps Engineer. I design, deploy, and operate production cloud infrastructure on AWS and Kubernetes with a security-first approach.">
+<meta property="og:title" content="Ian Altemus — Cloud Infrastructure & DevOps Engineer">
+<meta property="og:description" content="Built and operate a production AI SaaS on AWS. ECS Fargate, Terraform, Kubernetes, GitOps. 27% DM-to-booking conversion rate in production.">
+<meta property="og:url" content="https://ianaltemus.dev">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+[data-theme="light"]{
+  --bg:#f9f9f7;
+  --bg-card:#ffffff;
+  --bg-surface:#f2f1ee;
+  --bg-invert:#111112;
+  --border:#e5e4e0;
+  --border-md:#cccac4;
+  --text-1:#111112;
+  --text-2:#6a6a72;
+  --text-3:#aaaab4;
+  --accent:#2563eb;
+  --accent-light:#eff4ff;
+  --accent-dim:rgba(37,99,235,0.1);
+  --green:#16a34a;
+  --green-bg:#f0fdf4;
+  --green-border:#bbf7d0;
+  --shadow:0 1px 12px rgba(0,0,0,0.07);
+  --diff-bg:#111112;
+  --diff-text:rgba(255,255,255,0.88);
+  --diff-text-muted:rgba(255,255,255,0.42);
+  --diff-border:rgba(255,255,255,0.08);
+  --diff-icon-blue:rgba(96,165,250,0.15);
+  --diff-icon-green:rgba(52,211,153,0.12);
+  --diff-icon-amber:rgba(251,191,36,0.12);
+}
+
+[data-theme="dark"]{
+  --bg:#0e0e10;
+  --bg-card:#161618;
+  --bg-surface:#1c1c1f;
+  --bg-invert:#f9f9f7;
+  --border:#28282c;
+  --border-md:#38383e;
+  --text-1:#f0f0f4;
+  --text-2:#8a8a96;
+  --text-3:#505058;
+  --accent:#60a5fa;
+  --accent-light:rgba(96,165,250,0.1);
+  --accent-dim:rgba(96,165,250,0.12);
+  --green:#4ade80;
+  --green-bg:rgba(74,222,128,0.08);
+  --green-border:rgba(74,222,128,0.2);
+  --shadow:0 1px 12px rgba(0,0,0,0.4);
+  --diff-bg:#1a1a1e;
+  --diff-text:rgba(255,255,255,0.88);
+  --diff-text-muted:rgba(255,255,255,0.38);
+  --diff-border:rgba(255,255,255,0.07);
+  --diff-icon-blue:rgba(96,165,250,0.15);
+  --diff-icon-green:rgba(52,211,153,0.1);
+  --diff-icon-amber:rgba(251,191,36,0.1);
+}
+
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text-1);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;transition:background 0.2s,color 0.2s}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:56px;display:flex;align-items:center;background:var(--bg);border-bottom:1px solid var(--border);transition:background 0.2s,border-color 0.2s}
+.nav-inner{max-width:980px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;align-items:center;width:100%}
+.logo{font-family:'Outfit',sans-serif;font-size:15px;font-weight:600;color:var(--text-1);text-decoration:none;letter-spacing:-0.01em}
+.logo span{color:var(--accent)}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{font-size:13px;color:var(--text-2);text-decoration:none;transition:color 0.15s}
+.nav-links a:hover{color:var(--text-1)}
+.theme-btn{width:32px;height:32px;border-radius:7px;border:1px solid var(--border);background:var(--bg-surface);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all 0.15s;flex-shrink:0}
+.theme-btn:hover{border-color:var(--border-md)}
+.nav-cta{background:var(--text-1);color:var(--bg) !important;padding:7px 16px;border-radius:6px;font-size:12px !important;font-weight:500;transition:opacity 0.15s !important;text-decoration:none;font-family:'Inter',sans-serif}
+.nav-cta:hover{opacity:0.78}
+
+.container{max-width:980px;margin:0 auto;padding:0 32px}
+
+.hero{padding:108px 0 64px}
+.hero-grid{display:grid;grid-template-columns:1fr 380px;gap:52px;align-items:start}
+.eyebrow-bar{width:24px;height:2px;background:var(--accent);flex-shrink:0}
+.eyebrow-txt{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.09em;color:var(--accent);text-transform:uppercase}
+h1{font-family:'Outfit',sans-serif;font-size:clamp(32px,3.8vw,46px);font-weight:600;line-height:1.12;letter-spacing:-0.025em;color:var(--text-1);margin-bottom:10px}
+.h1-blue{color:var(--accent)}
+.hero-sub{font-family:'Outfit',sans-serif;font-size:16px;font-weight:400;color:var(--text-2);letter-spacing:-0.005em;margin-bottom:22px;line-height:1.55}
+.hero-body{font-size:15px;color:var(--text-2);line-height:1.8;margin-bottom:32px;max-width:520px}
+.hero-body strong{color:var(--text-1);font-weight:500}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap}
+.btn-p{display:inline-flex;align-items:center;gap:7px;background:var(--text-1);color:var(--bg);padding:10px 20px;border-radius:7px;font-size:13px;font-weight:500;text-decoration:none;transition:opacity 0.15s}
+.btn-p:hover{opacity:0.78}
+.btn-s{display:inline-flex;align-items:center;gap:7px;background:transparent;color:var(--text-2);padding:10px 20px;border-radius:7px;font-size:13px;text-decoration:none;border:1px solid var(--border);transition:all 0.15s}
+.btn-s:hover{border-color:var(--border-md);color:var(--text-1)}
+
+.diff-card{background:var(--diff-bg);border-radius:14px;padding:24px;position:relative;overflow:hidden;border:1px solid var(--border)}
+.diff-glow{position:absolute;top:-50px;right:-50px;width:180px;height:180px;background:radial-gradient(circle,rgba(96,165,250,0.12) 0%,transparent 70%);pointer-events:none}
+.diff-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.09em;color:var(--diff-text-muted);text-transform:uppercase;margin-bottom:16px}
+.diff-item{padding:13px 0;border-bottom:1px solid var(--diff-border);display:flex;align-items:flex-start;gap:11px}
+.diff-item:last-child{border-bottom:none;padding-bottom:0}
+.diff-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;margin-top:2px}
+.di-b{background:var(--diff-icon-blue)}
+.di-g{background:var(--diff-icon-green)}
+.di-a{background:var(--diff-icon-amber)}
+.diff-title{font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:var(--diff-text);margin-bottom:3px;letter-spacing:-0.01em}
+.diff-desc{font-size:12px;color:var(--diff-text-muted);line-height:1.55}
+.live-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.22);border-radius:100px;padding:3px 9px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#4ade80;margin-top:9px;letter-spacing:0.03em}
+.live-dot{width:5px;height:5px;border-radius:50%;background:#4ade80;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+
+.loom-band{background:var(--accent-light);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 0}
+.loom-inner{max-width:980px;margin:0 auto;padding:0 32px;display:flex;align-items:center;gap:24px}
+.loom-thumb{width:120px;height:72px;background:var(--bg-surface);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:24px;cursor:pointer;transition:border-color 0.15s;text-decoration:none}
+.loom-thumb:hover{border-color:var(--border-md)}
+.loom-content{flex:1}
+.loom-title{font-family:'Outfit',sans-serif;font-size:16px;font-weight:600;color:var(--text-1);margin-bottom:4px;letter-spacing:-0.01em}
+.loom-desc{font-size:13px;color:var(--text-2);line-height:1.5;margin-bottom:8px}
+.loom-link{font-size:13px;color:var(--accent);text-decoration:none;font-weight:500}
+.loom-link:hover{opacity:0.7}
+.loom-meta{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-3);margin-left:8px}
+
+.section{padding:68px 0;border-top:1px solid var(--border)}
+.label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.11em;color:var(--text-3);text-transform:uppercase;margin-bottom:32px;display:flex;align-items:center;gap:12px}
+.label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:44px}
+.stat{background:var(--bg-card);padding:20px 18px;transition:background 0.2s}
+.stat-n{font-family:'Outfit',sans-serif;font-size:clamp(22px,2.8vw,32px);font-weight:700;letter-spacing:-0.03em;color:var(--text-1);line-height:1;margin-bottom:6px}
+.stat-n em{color:var(--accent);font-style:normal}
+.stat-l{font-size:12px;color:var(--text-2);line-height:1.45}
+
+.achieve-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:44px}
+.achieve-item{padding:15px 17px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;display:flex;gap:13px;align-items:flex-start;transition:border-color 0.15s}
+.achieve-item:hover{border-color:var(--border-md)}
+.achieve-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);font-weight:500;flex-shrink:0;margin-top:2px}
+.achieve-text{font-size:13px;color:var(--text-2);line-height:1.55}
+.achieve-text strong{color:var(--text-1);font-weight:500}
+
+.proj-lbl{font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.04em;color:var(--text-3);text-transform:uppercase;margin-bottom:10px;padding:0 2px}
+
+.project-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:12px;transition:border-color 0.2s,box-shadow 0.2s}
+.project-card:hover{border-color:var(--border-md);box-shadow:var(--shadow)}
+.project-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:5px}
+.project-title{font-family:'Outfit',sans-serif;font-size:19px;font-weight:600;letter-spacing:-0.02em;color:var(--text-1)}
+.badge{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 9px;border-radius:100px;white-space:nowrap;flex-shrink:0;letter-spacing:0.03em;font-weight:500}
+.badge-live{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.badge-build{background:var(--accent-light);color:var(--accent);border:1px solid rgba(37,99,235,0.2)}
+.project-tagline{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-3);margin-bottom:14px;letter-spacing:0.01em}
+.project-desc{font-size:14px;color:var(--text-2);line-height:1.72;margin-bottom:18px}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.tag{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;background:var(--bg-surface);border:1px solid var(--border);border-radius:5px;color:var(--text-3)}
+.proj-links{display:flex;gap:16px;margin-bottom:22px}
+.proj-link{font-size:13px;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:4px;transition:opacity 0.15s;font-weight:500}
+.proj-link:hover{opacity:0.6}
+.proj-link svg{width:11px;height:11px}
+
+.arch-dark{background:#111112;border-radius:10px;padding:24px;position:relative;overflow:hidden;margin-top:4px}
+.arch-light{background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:24px;margin-top:4px}
+.arch-glow{position:absolute;bottom:-40px;right:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(96,165,250,0.12) 0%,transparent 70%);pointer-events:none}
+.arch-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.22);letter-spacing:0.09em;text-transform:uppercase;margin-bottom:18px}
+.arch-lbl-l{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-3);letter-spacing:0.09em;text-transform:uppercase;margin-bottom:18px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:0;margin-bottom:16px}
+.fn{display:flex;flex-direction:column;align-items:center;gap:5px}
+.fb{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:7px 10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.75);text-align:center;white-space:nowrap}
+.fb.hi{border-color:rgba(96,165,250,0.4);color:#93c5fd;background:rgba(96,165,250,0.08)}
+.fb.go{border-color:rgba(74,222,128,0.3);color:#4ade80;background:rgba(74,222,128,0.07)}
+.fbl{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:7px 10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-1);text-align:center;white-space:nowrap}
+.fbl.hi{border-color:rgba(37,99,235,0.25);color:var(--accent);background:var(--accent-light)}
+.fbl.go{border-color:var(--green-border);color:var(--green);background:var(--green-bg)}
+.fs{font-size:9px;color:rgba(255,255,255,0.2);font-family:'JetBrains Mono',monospace;text-align:center}
+.fsl{font-size:9px;color:var(--text-3);font-family:'JetBrains Mono',monospace;text-align:center}
+.fa{color:rgba(255,255,255,0.15);font-size:12px;margin:0 4px;margin-bottom:16px;flex-shrink:0}
+.fal{color:var(--text-3);font-size:12px;margin:0 4px;margin-bottom:16px;flex-shrink:0}
+.anote{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-left:2px solid rgba(96,165,250,0.45);border-radius:0 6px 6px 0;padding:12px 15px;font-size:12px;color:rgba(255,255,255,0.38);line-height:1.6}
+.anote strong{color:rgba(255,255,255,0.7);font-weight:500}
+.anote-l{background:var(--bg-card);border:1px solid var(--border);border-left:2px solid var(--accent);border-radius:0 6px 6px 0;padding:12px 15px;font-size:12px;color:var(--text-2);line-height:1.6}
+.anote-l strong{color:var(--text-1);font-weight:500}
+
+.decisions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px}
+.dec-box{background:var(--bg-surface);border:1px solid var(--border);border-radius:8px;padding:14px}
+.dec-q{font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:var(--text-1);margin-bottom:9px;letter-spacing:-0.01em}
+.dec-item{display:flex;gap:8px;align-items:flex-start;margin-bottom:5px}
+.dec-item:last-child{margin-bottom:0}
+.dd{width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:6px}
+.dt{font-size:11px;color:var(--text-2);line-height:1.5}
+
+.k8s-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.k8s-box{background:var(--bg-card);border:1px solid var(--border);border-radius:7px;padding:12px 13px}
+.k8s-layer{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px}
+.k8s-name{font-size:12px;font-weight:500;color:var(--accent);font-family:'JetBrains Mono',monospace}
+.k8s-desc{font-size:11px;color:var(--text-2);margin-top:3px;line-height:1.45}
+
+.stack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(126px,1fr));gap:7px}
+.stack-item{background:var(--bg-card);border:1px solid var(--border);border-radius:7px;padding:11px 13px;transition:border-color 0.15s}
+.stack-item:hover{border-color:var(--border-md)}
+.stack-cat{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px}
+.stack-name{font-size:13px;font-weight:500;color:var(--text-1)}
+
+.about-section{background:#111112;padding:68px 0;transition:background 0.2s}
+[data-theme="dark"] .about-section{background:#0e0e10;border-top:1px solid var(--border)}
+.about-ap{color:rgba(255,255,255,0.62);font-size:15px;line-height:1.8;margin-bottom:16px;font-weight:300}
+.about-ap strong{color:#ffffff;font-weight:500}
+.about-cert{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:7px;padding:13px 15px;display:flex;align-items:center;gap:11px}
+.about-cname{color:#f0f0f4;font-size:13px;font-weight:500}
+.about-cissuer{color:rgba(255,255,255,0.35);font-size:11px;font-family:"JetBrains Mono",monospace;margin-top:2px}
+.about-lbl{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:0.11em;text-transform:uppercase;margin-bottom:32px;display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.25)}
+.about-lbl::after{content:"";flex:1;height:1px;background:rgba(255,255,255,0.1)}
+.quote-wrap{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:20px;margin-top:20px}
+.quote-mark{font-family:"Outfit",sans-serif;font-size:36px;color:rgba(96,165,250,0.4);line-height:0.8;margin-bottom:10px;font-weight:700}
+.quote-text{font-size:15px;line-height:1.7;font-weight:300;font-style:italic;color:rgba(255,255,255,0.72)}
+.role-pill{font-family:"JetBrains Mono",monospace;font-size:11px;padding:4px 10px;border-radius:100px;border:1px solid rgba(96,165,250,0.3);background:rgba(96,165,250,0.14);color:#93c5fd}
+.role-pill-neutral{font-family:"JetBrains Mono",monospace;font-size:11px;padding:4px 10px;border-radius:100px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.52)}
+.roles-lbl{font-family:"JetBrains Mono",monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;color:rgba(255,255,255,0.3)}
+.roles-wrap{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);margin-top:14px;padding:16px;border-radius:8px}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.cert-list{display:flex;flex-direction:column;gap:7px}
+.cdot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.roles-pills{display:flex;flex-wrap:wrap;gap:7px}
+
+.contact-section{padding:68px 0 80px;border-top:1px solid var(--border)}
+.contact-intro{font-size:15px;color:var(--text-2);max-width:500px;margin-bottom:24px;line-height:1.7}
+.contact-intro strong{color:var(--text-1);font-weight:500}
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.contact-card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:18px 20px;text-decoration:none;display:flex;flex-direction:column;gap:4px;transition:all 0.15s}
+.contact-card:hover{border-color:rgba(37,99,235,0.3);background:var(--accent-light)}
+.contact-l{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.08em}
+.contact-v{font-size:13px;font-weight:500;color:var(--text-1)}
+.contact-d{font-size:12px;color:var(--text-3)}
+
+footer{padding:20px 0;border-top:1px solid var(--border);background:var(--bg)}
+footer .fi{max-width:980px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;align-items:center}
+footer p{font-size:11px;color:var(--text-3);font-family:'JetBrains Mono',monospace}
+
+@media(max-width:820px){
+  .hero-grid{grid-template-columns:1fr}
+  .diff-card{display:none}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .achieve-grid{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .decisions{grid-template-columns:1fr}
+  .k8s-grid{grid-template-columns:1fr 1fr}
+  .loom-inner{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:540px){
+  .stats-row{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .k8s-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">Ian Altemus<span>.</span></a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#stack">Stack</a>
+        <a href="#about">About</a>
+        <a href="mailto:ianaltemustech@gmail.com" class="nav-cta">Get in touch</a>
+      </div>
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <h1>Cloud Infrastructure<br><span class="h1-blue">& DevOps Engineer</span></h1>
+        <p class="hero-sub">Building and operating production AI systems on AWS, Kubernetes, and Terraform.</p>
+        <p class="hero-body">
+          I design, deploy, and operate production cloud infrastructure with a <strong>security-first, least-privilege approach at every layer.</strong> I balance reliability, performance, and cost, and measure success by business outcomes, not completed tasks.<br><br>
+          I bring something most engineers do not have: <strong>15 years operating real businesses</strong> before building the infrastructure behind them. I know what it feels like on both sides when systems fail.
+        </p>
+        <div class="btn-row">
+          <a href="#work" class="btn-p">View my work</a>
+          <a href="#about" class="btn-s">About me</a>
+        </div>
+      </div>
+      <div>
+        <div class="diff-card">
+          <div class="diff-glow"></div>
+          <div class="diff-lbl">What Differentiates Me</div>
+          <div class="diff-item">
+            <div class="diff-icon di-b">⚡</div>
+            <div>
+              <div class="diff-title">Production AI infrastructure, live today</div>
+              <div class="diff-desc">Not a tutorial project. A Meta-approved SaaS platform handling real client traffic since April 2026.</div>
+              <div class="live-pill"><span class="live-dot"></span>Live in production</div>
+            </div>
+          </div>
+          <div class="diff-item">
+            <div class="diff-icon di-g">🎯</div>
+            <div>
+              <div class="diff-title">Operator mindset, not just builder</div>
+              <div class="diff-desc">15 years running multi-location businesses before engineering. I understand what downtime actually costs.</div>
+            </div>
+          </div>
+          <div class="diff-item">
+            <div class="diff-icon di-a">🔧</div>
+            <div>
+              <div class="diff-title">End-to-end ownership</div>
+              <div class="diff-desc">Infrastructure, networking, application layer, DevOps pipeline, and security scanning. From the first line of Terraform to production traffic.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="loom-band">
+  <div class="loom-inner">
+    <a href="#" class="loom-thumb">▶</a>
+    <div class="loom-content">
+      <div class="loom-title">Hear it from me directly</div>
+      <div class="loom-desc">A two-minute introduction covering who I am, what I have built, and what I am looking for next. More useful than a resume.</div>
+      <a href="#" class="loom-link">Watch the intro <span class="loom-meta">2 min</span></a>
+    </div>
+  </div>
+</div>
+
+<section class="section" id="work">
+  <div class="container">
+    <p class="label">Impact in production</p>
+
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-n"><em>&lt;</em>60<em>s</em></div>
+        <div class="stat-l">Average DM response time. Down from 6 hours on the same workload.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">27<em>%</em></div>
+        <div class="stat-l">DM-to-booking conversion rate on live production traffic.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">5 <em style="font-size:0.65em">min</em></div>
+        <div class="stat-l">CI/CD build time. Reduced from 20 minutes with caching and pipeline optimization.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">106</div>
+        <div class="stat-l">Terraform-managed AWS resources deployed during a live migration with zero downtime.</div>
+      </div>
+    </div>
+
+    <p class="label">Highlights</p>
+    <div class="achieve-grid">
+      <div class="achieve-item"><div class="achieve-num">01</div><div class="achieve-text"><strong>Built and operate a Meta-approved production AI SaaS platform on AWS,</strong> live client traffic, real business outcomes, zero production outages since launch.</div></div>
+      <div class="achieve-item"><div class="achieve-num">02</div><div class="achieve-text"><strong>Reduced average DM response time from 6 hours to under 60 seconds</strong> via event-driven architecture: API Gateway, SQS decoupling, ECS Fargate consumer.</div></div>
+      <div class="achieve-item"><div class="achieve-num">03</div><div class="achieve-text"><strong>Cut CI/CD pipeline build time from 20 minutes to 5 minutes</strong> using Docker layer caching, path-based triggers, and split app and infra pipelines.</div></div>
+      <div class="achieve-item"><div class="achieve-num">04</div><div class="achieve-text"><strong>Implemented GitOps with ArgoCD and Argo Rollouts,</strong> canary deployments, automated rollback on health check failure, Git as the single source of truth.</div></div>
+      <div class="achieve-item"><div class="achieve-num">05</div><div class="achieve-text"><strong>Hardened CI/CD security pipeline</strong> with Gitleaks secrets scanning, Bandit SAST, Trivy image scanning, and pip-audit required before every merge.</div></div>
+      <div class="achieve-item"><div class="achieve-num">06</div><div class="achieve-text"><strong>Designed and deployed an agentic AI booking integration</strong> using Playwright on managed ECS compute, triggered by booking intent detection in live conversation flow.</div></div>
+      <div class="achieve-item"><div class="achieve-num">07</div><div class="achieve-text"><strong>Systematic production debugging approach:</strong> establish blast radius first, isolate to network, application, or infrastructure layer, trace through logs and exit codes, remediate, then document root cause and update runbooks to prevent recurrence.</div></div>
+      <div class="achieve-item"><div class="achieve-num">08</div><div class="achieve-text"><strong>Designed and deployed a full observability stack</strong> using Prometheus sidecar injection and Grafana dashboards with custom pod and instance level metrics, moving beyond default cluster metrics to measure what actually matters for the application workload.</div></div>
+    </div>
+
+    <p class="label">Projects</p>
+
+    <p class="proj-lbl">Featured Production Project</p>
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-title">SilverLink AI</div>
+        <div class="badge badge-live">Live in production</div>
+      </div>
+      <p class="project-tagline">ecs fargate · api gateway · sqs · dynamodb · terraform · github actions · claude api · playwright</p>
+      <p class="project-desc">Meta-approved multi-tenant AI SaaS platform automating Instagram DM responses for beauty and wellness businesses. Built the complete stack from scratch including infrastructure, networking, application layer, and DevOps pipeline. The AI receptionist responds to real DMs in under 60 seconds, handles booking intent, and hands off to an agentic Playwright booking agent on a separate managed compute cluster for live availability lookups. First client: Secretive Nail Bar, three Southern California locations.</p>
+      <div class="tag-row">
+        <span class="tag">ECS Fargate</span><span class="tag">API Gateway</span><span class="tag">SQS</span><span class="tag">DynamoDB</span><span class="tag">Terraform</span><span class="tag">GitHub Actions</span><span class="tag">Claude API</span><span class="tag">Playwright</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://silverlinkai.com" class="proj-link" target="_blank">Live product <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M5 2h5v5"/></svg></a>
+        <a href="https://github.com/ian-altemus-cloud/Secretive-ai-project" class="proj-link" target="_blank">GitHub <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M5 2h5v5"/></svg></a>
+      </div>
+      <div class="arch-dark">
+        <div class="arch-glow"></div>
+        <div class="arch-lbl">AWS architecture</div>
+        <div class="flow">
+          <div class="fn"><div class="fb go">Instagram</div><div class="fs">Meta Graph API</div></div>
+          <div class="fa">→</div>
+          <div class="fn"><div class="fb hi">API Gateway</div><div class="fs">HMAC verified</div></div>
+          <div class="fa">→</div>
+          <div class="fn"><div class="fb">SQS</div><div class="fs">Queue + DLQ</div></div>
+          <div class="fa">→</div>
+          <div class="fn"><div class="fb hi">ECS Fargate</div><div class="fs">Flask consumer</div></div>
+          <div class="fa">→</div>
+          <div class="fn"><div class="fb hi">Claude API</div><div class="fs">Per-tenant voice</div></div>
+          <div class="fa">→</div>
+          <div class="fn"><div class="fb">DynamoDB</div><div class="fs">Conversation memory</div></div>
+          <div class="fa">→</div>
+          <div class="fn"><div class="fb go">Response</div><div class="fs">Under 60 seconds</div></div>
+        </div>
+        <div class="anote"><strong>Key decisions:</strong> Provider abstraction layer bridges Claude API and AWS Bedrock for runtime switching without code changes. Agentic Playwright agent runs on a separate ECS task triggered by booking intent. Split CI/CD pipelines with path-based triggers so app changes never touch infrastructure pipelines.</div>
+      </div>
+      <div class="decisions">
+        <div class="dec-box">
+          <div class="dec-q">Why SQS over direct processing?</div>
+          <div class="dec-item"><div class="dd"></div><div class="dt">Decouples webhook ingestion from AI processing</div></div>
+          <div class="dec-item"><div class="dd"></div><div class="dt">Prevents Meta webhook timeouts on slow AI responses</div></div>
+          <div class="dec-item"><div class="dd"></div><div class="dt">Enables retry logic and dead letter queue strategy</div></div>
+        </div>
+        <div class="dec-box">
+          <div class="dec-q">Why ECS over EKS?</div>
+          <div class="dec-item"><div class="dd"></div><div class="dt">Smaller operational footprint for a single-product platform</div></div>
+          <div class="dec-item"><div class="dd"></div><div class="dt">Faster delivery without cluster management overhead</div></div>
+          <div class="dec-item"><div class="dd"></div><div class="dt">Lower infrastructure cost at current traffic volume</div></div>
+        </div>
+        <div class="dec-box">
+          <div class="dec-q">Why DynamoDB over Postgres?</div>
+          <div class="dec-item"><div class="dd"></div><div class="dt">Conversation access pattern fits key-value model exactly</div></div>
+          <div class="dec-item"><div class="dd"></div><div class="dt">Zero operational burden, no connection pooling</div></div>
+          <div class="dec-item"><div class="dd"></div><div class="dt">Native AWS integration with Terraform and IAM</div></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="proj-lbl" style="margin-top:24px">Platform Engineering Project</p>
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-title">Trendlink</div>
+        <div class="badge badge-build">Active build</div>
+      </div>
+      <p class="project-tagline">kubernetes · argocd · argo rollouts · helm · vault · aws · azure · prometheus · grafana</p>
+      <p class="project-desc">Kubernetes-based prospect enrichment and intelligence platform spanning AWS and Azure. A Playwright agent aggregates and enriches real business data via Google Places API, scored and surfaced through a dashboard. Built on a hub-and-spoke multi-cloud topology with GitOps managed via ArgoCD, canary deployments via Argo Rollouts, and Vault sidecar secret injection.</p>
+      <div class="tag-row">
+        <span class="tag">Kubernetes</span><span class="tag">ArgoCD</span><span class="tag">Argo Rollouts</span><span class="tag">Helm</span><span class="tag">Vault</span><span class="tag">Playwright</span><span class="tag">AWS</span><span class="tag">Azure</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/ian-altemus-cloud" class="proj-link" target="_blank">GitHub <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M5 2h5v5"/></svg></a>
+      </div>
+      <div class="arch-light">
+        <div class="arch-lbl-l">Kubernetes topology</div>
+        <div class="k8s-grid">
+          <div class="k8s-box"><div class="k8s-layer">GitOps</div><div class="k8s-name">ArgoCD</div><div class="k8s-desc">Git as source of truth. Drift detection and auto-sync on every commit.</div></div>
+          <div class="k8s-box"><div class="k8s-layer">Deployments</div><div class="k8s-name">Argo Rollouts</div><div class="k8s-desc">Canary strategy. Automated rollback on health check failure.</div></div>
+          <div class="k8s-box"><div class="k8s-layer">Secrets</div><div class="k8s-name">Vault</div><div class="k8s-desc">Sidecar injection. Secrets never stored in manifests or Git.</div></div>
+          <div class="k8s-box"><div class="k8s-layer">Packaging</div><div class="k8s-name">Helm</div><div class="k8s-desc">Templated charts. Environment separation via values files.</div></div>
+          <div class="k8s-box"><div class="k8s-layer">Observability</div><div class="k8s-name">Prometheus + Grafana</div><div class="k8s-desc">Metrics collection and dashboards. In progress.</div></div>
+          <div class="k8s-box"><div class="k8s-layer">Multi-cloud</div><div class="k8s-name">AWS + Azure</div><div class="k8s-desc">Hub-and-spoke topology. Platform agnostic by design.</div></div>
+        </div>
+        <div class="anote-l"><strong>Data flow:</strong> Playwright agent scrapes and enriches business data via Google Places API. Results are scored and surfaced through a React dashboard. ArgoCD syncs every manifest change from Git with no manual kubectl applies in production.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="stack">
+  <div class="container">
+    <p class="label">Technical stack</p>
+    <div class="stack-grid">
+      <div class="stack-item"><div class="stack-cat">Cloud</div><div class="stack-name">AWS</div></div>
+      <div class="stack-item"><div class="stack-cat">Cloud</div><div class="stack-name">Azure</div></div>
+      <div class="stack-item"><div class="stack-cat">Compute</div><div class="stack-name">ECS Fargate</div></div>
+      <div class="stack-item"><div class="stack-cat">Orchestration</div><div class="stack-name">Kubernetes</div></div>
+      <div class="stack-item"><div class="stack-cat">IaC</div><div class="stack-name">Terraform</div></div>
+      <div class="stack-item"><div class="stack-cat">GitOps</div><div class="stack-name">ArgoCD</div></div>
+      <div class="stack-item"><div class="stack-cat">CI/CD</div><div class="stack-name">GitHub Actions</div></div>
+      <div class="stack-item"><div class="stack-cat">Packaging</div><div class="stack-name">Helm</div></div>
+      <div class="stack-item"><div class="stack-cat">Secrets</div><div class="stack-name">Vault</div></div>
+      <div class="stack-item"><div class="stack-cat">Secrets</div><div class="stack-name">Secrets Manager</div></div>
+      <div class="stack-item"><div class="stack-cat">Messaging</div><div class="stack-name">SQS</div></div>
+      <div class="stack-item"><div class="stack-cat">Database</div><div class="stack-name">DynamoDB</div></div>
+      <div class="stack-item"><div class="stack-cat">Gateway</div><div class="stack-name">API Gateway</div></div>
+      <div class="stack-item"><div class="stack-cat">Observability</div><div class="stack-name">Prometheus</div></div>
+      <div class="stack-item"><div class="stack-cat">Dashboards</div><div class="stack-name">Grafana</div></div>
+      <div class="stack-item"><div class="stack-cat">AI</div><div class="stack-name">Claude API</div></div>
+      <div class="stack-item"><div class="stack-cat">Language</div><div class="stack-name">Python</div></div>
+      <div class="stack-item"><div class="stack-cat">Security</div><div class="stack-name">Trivy</div></div>
+      <div class="stack-item"><div class="stack-cat">Security</div><div class="stack-name">Bandit</div></div>
+      <div class="stack-item"><div class="stack-cat">Security</div><div class="stack-name">Gitleaks</div></div>
+      <div class="stack-item"><div class="stack-cat">Containers</div><div class="stack-name">Docker</div></div>
+      <div class="stack-item"><div class="stack-cat">Rollouts</div><div class="stack-name">Argo Rollouts</div></div>
+      <div class="stack-item"><div class="stack-cat">Automation</div><div class="stack-name">Playwright</div></div>
+      <div class="stack-item"><div class="stack-cat">Registry</div><div class="stack-name">ECR</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="about-section" id="about">
+  <div class="container">
+    <p class="about-lbl">About</p>
+    <div class="about-grid">
+      <div>
+        <p class="about-ap">I am a <strong>Cloud Infrastructure and DevOps Engineer</strong> focused on AWS, Kubernetes, Terraform, and production AI systems. I design and operate infrastructure end-to-end with a security-first approach at every layer.</p>
+        <p class="about-ap">Before engineering, I spent <strong>15 years running multi-location businesses.</strong> That background changed how I think about infrastructure. I know what it feels like from the stakeholder side when systems fail to meet objectives. I am not task-oriented. I am outcome-oriented at my core.</p>
+        <p class="about-ap">I am comfortable under pressure, meticulous about security, and genuinely enjoy debugging complex flows when things break. I combine <strong>operational discipline with clear, direct communication</strong> across technical and non-technical teams.</p>
+        <div class="quote-wrap">
+          <div class="quote-mark">"</div>
+          <p class="quote-text">I have always been drawn to solving complex problems. Cloud and DevOps gave me the perfect outlet to realize that characteristic.</p>
+        </div>
+      </div>
+      <div>
+        <div class="cert-list">
+          <div class="about-cert"><div class="cdot"></div><div><div class="about-cname">AWS Solutions Architect Associate</div><div class="about-cissuer">Amazon Web Services</div></div></div>
+          <div class="about-cert"><div class="cdot"></div><div><div class="about-cname">HashiCorp Terraform Associate</div><div class="about-cissuer">HashiCorp</div></div></div>
+          <div class="about-cert"><div class="cdot"></div><div><div class="about-cname">B.S. Cloud Computing</div><div class="about-cissuer">WGU — in progress</div></div></div>
+          <div class="about-cert"><div class="cdot"></div><div><div class="about-cname">CKA — Certified Kubernetes Administrator</div><div class="about-cissuer">CNCF — in progress</div></div></div>
+        </div>
+        <div class="roles-wrap">
+          <div class="roles-lbl">Currently open to</div>
+          <div class="roles-pills">
+            <span class="role-pill">Cloud Engineer</span>
+            <span class="role-pill">DevOps Engineer</span>
+            <span class="role-pill">Platform Engineer</span>
+            <span class="role-pill">SRE</span>
+            <span class="role-pill-neutral">Remote</span>
+            <span class="role-pill-neutral">Hybrid</span>
+            <span class="role-pill-neutral">On-site</span>
+            <span class="role-pill-neutral">Contract or FT</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="container">
+    <p class="label">Contact</p>
+    <p class="contact-intro">Open to Cloud Engineer, DevOps Engineer, Platform Engineer, and SRE roles. <strong>Remote, hybrid, or on-site. Costa Mesa, CA.</strong> Contract, contract-to-hire, or full time.</p>
+    <div class="contact-grid">
+      <a href="mailto:ianaltemustech@gmail.com" class="contact-card">
+        <span class="contact-l">Email</span>
+        <span class="contact-v">ianaltemustech@gmail.com</span>
+        <span class="contact-d">Best way to reach me</span>
+      </a>
+      <a href="https://www.linkedin.com/in/ian-altemus-cloud" target="_blank" class="contact-card">
+        <span class="contact-l">LinkedIn</span>
+        <span class="contact-v">ian-altemus-cloud</span>
+        <span class="contact-d">linkedin.com/in/ian-altemus-cloud</span>
+      </a>
+      <a href="https://github.com/ian-altemus-cloud" target="_blank" class="contact-card">
+        <span class="contact-l">GitHub</span>
+        <span class="contact-v">ian-altemus-cloud</span>
+        <span class="contact-d">github.com/ian-altemus-cloud</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <p>ianaltemus.dev</p>
+    <p>Costa Mesa, CA</p>
+  </div>
+</footer>
+
+<script>
+const btn=document.getElementById('themeToggle');
+const html=document.documentElement;
+const saved=localStorage.getItem('theme')||'light';
+html.setAttribute('data-theme',saved);
+btn.textContent=saved==='dark'?'☀️':'🌙';
+btn.addEventListener('click',()=>{
+  const next=html.getAttribute('data-theme')==='dark'?'light':'dark';
+  html.setAttribute('data-theme',next);
+  btn.textContent=next==='dark'?'☀️':'🌙';
+  localStorage.setItem('theme',next);
+});
+</script>
+</body>
+</html>
