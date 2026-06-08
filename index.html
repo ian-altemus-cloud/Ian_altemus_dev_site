@@ -87,6 +87,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:56px;display:flex;ali
 
 .hero{padding:108px 0 64px}
 .hero-grid{display:grid;grid-template-columns:1fr 380px;gap:52px;align-items:start}
+.eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:18px}
 .eyebrow-bar{width:24px;height:2px;background:var(--accent);flex-shrink:0}
 .eyebrow-txt{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.09em;color:var(--accent);text-transform:uppercase}
 h1{font-family:'Outfit',sans-serif;font-size:clamp(32px,3.8vw,46px);font-weight:600;line-height:1.12;letter-spacing:-0.025em;color:var(--text-1);margin-bottom:10px}
@@ -292,7 +293,7 @@ footer p{font-size:11px;color:var(--text-3);font-family:'JetBrains Mono',monospa
       <div>
         <div class="diff-card">
           <div class="diff-glow"></div>
-          <div class="diff-lbl">What Differentiates Me</div>
+          <div class="diff-lbl">What makes me different</div>
           <div class="diff-item">
             <div class="diff-icon di-b">⚡</div>
             <div>
@@ -440,17 +441,60 @@ footer p{font-size:11px;color:var(--text-3);font-family:'JetBrains Mono',monospa
       <div class="proj-links">
         <a href="https://github.com/ian-altemus-cloud" class="proj-link" target="_blank">GitHub <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M5 2h5v5"/></svg></a>
       </div>
-      <div class="arch-light">
-        <div class="arch-lbl-l">Kubernetes topology</div>
-        <div class="k8s-grid">
-          <div class="k8s-box"><div class="k8s-layer">GitOps</div><div class="k8s-name">ArgoCD</div><div class="k8s-desc">Git as source of truth. Drift detection and auto-sync on every commit.</div></div>
-          <div class="k8s-box"><div class="k8s-layer">Deployments</div><div class="k8s-name">Argo Rollouts</div><div class="k8s-desc">Canary strategy. Automated rollback on health check failure.</div></div>
-          <div class="k8s-box"><div class="k8s-layer">Secrets</div><div class="k8s-name">Vault</div><div class="k8s-desc">Sidecar injection. Secrets never stored in manifests or Git.</div></div>
-          <div class="k8s-box"><div class="k8s-layer">Packaging</div><div class="k8s-name">Helm</div><div class="k8s-desc">Templated charts. Environment separation via values files.</div></div>
-          <div class="k8s-box"><div class="k8s-layer">Observability</div><div class="k8s-name">Prometheus + Grafana</div><div class="k8s-desc">Metrics collection and dashboards. In progress.</div></div>
-          <div class="k8s-box"><div class="k8s-layer">Multi-cloud</div><div class="k8s-name">AWS + Azure</div><div class="k8s-desc">Hub-and-spoke topology. Platform agnostic by design.</div></div>
+      <div class="arch-dark" style="margin-top:4px">
+        <div class="arch-glow"></div>
+        <div class="arch-lbl">CI/CD pipeline</div>
+        <div class="flow">
+          <div class="fn"><div class="fb go">Git Push</div><div class="fs">main branch</div></div>
+          <div class="fa">→</div>
+          <div class="fn"><div class="fb hi">GitHub Actions</div><div class="fs">build + scan</div></div>
+          <div class="fa">→</div>
+          <div class="fn"><div class="fb hi">Helm Chart</div><div class="fs">packaged manifest</div></div>
+          <div class="fa">→</div>
+          <div class="fn"><div class="fb hi">ArgoCD</div><div class="fs">detects drift</div></div>
+          <div class="fa">→</div>
+          <div class="fn"><div class="fb hi">Argo Rollouts</div><div class="fs">canary split</div></div>
+          <div class="fa">→</div>
+          <div class="fn"><div class="fb">Health Check</div><div class="fs">readiness probe</div></div>
+          <div class="fa">→</div>
+          <div class="fn"><div class="fb go">Promote</div><div class="fs">or auto-rollback</div></div>
         </div>
-        <div class="anote-l"><strong>Data flow:</strong> Playwright agent scrapes and enriches business data via Google Places API. Results are scored and surfaced through a React dashboard. ArgoCD syncs every manifest change from Git with no manual kubectl applies in production.</div>
+        <div class="anote"><strong>Pipeline logic:</strong> Every git push triggers GitHub Actions for build and security scanning. Helm packages the manifests. ArgoCD detects the new image tag and syncs. Argo Rollouts splits traffic at 20% canary. Health checks gate promotion. Failed probes trigger automatic rollback with no manual intervention.</div>
+      </div>
+
+      <div class="arch-light" style="margin-top:10px">
+        <div class="arch-lbl-l">Infrastructure topology</div>
+        <div class="flow">
+          <div class="fn"><div class="fbl go">AWS</div><div class="fsl">primary cloud</div></div>
+          <div class="fal">→</div>
+          <div class="fn"><div class="fbl hi">K8s Cluster</div><div class="fsl">workload plane</div></div>
+          <div class="fal">→</div>
+          <div class="fn"><div class="fbl hi">Vault</div><div class="fsl">sidecar injection</div></div>
+          <div class="fal">→</div>
+          <div class="fn"><div class="fbl hi">Playwright Agent</div><div class="fsl">scrape + enrich</div></div>
+          <div class="fal">→</div>
+          <div class="fn"><div class="fbl">Google Places API</div><div class="fsl">business data</div></div>
+          <div class="fal">→</div>
+          <div class="fn"><div class="fbl">Dashboard</div><div class="fsl">scored results</div></div>
+        </div>
+        <div style="display:flex;gap:8px;margin:12px 0">
+          <div style="flex:1;background:var(--bg-card);border:1px solid var(--border);border-radius:7px;padding:12px 14px">
+            <div class="k8s-layer">Observability</div>
+            <div class="k8s-name">Prometheus + Grafana</div>
+            <div class="k8s-desc">Pod and instance level metrics. Custom dashboards per workload.</div>
+          </div>
+          <div style="flex:1;background:var(--bg-card);border:1px solid var(--border);border-radius:7px;padding:12px 14px">
+            <div class="k8s-layer">Multi-cloud</div>
+            <div class="k8s-name">AWS + Azure hub-and-spoke</div>
+            <div class="k8s-desc">Platform agnostic by design. Azure ACA planned for next phase.</div>
+          </div>
+          <div style="flex:1;background:var(--bg-card);border:1px solid var(--border);border-radius:7px;padding:12px 14px">
+            <div class="k8s-layer">Secrets</div>
+            <div class="k8s-name">Vault sidecar injection</div>
+            <div class="k8s-desc">Secrets never in manifests or Git. Rotated independently of deployments.</div>
+          </div>
+        </div>
+        <div class="anote-l"><strong>Design principle:</strong> Infrastructure and application layers are fully decoupled. Terraform manages the platform. ArgoCD manages the workloads. Vault manages secrets. Each layer is independently replaceable without touching the others.</div>
       </div>
     </div>
   </div>
